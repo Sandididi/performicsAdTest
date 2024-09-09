@@ -1,0 +1,100 @@
+body {
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	background: #E3E3E3;
+	height: 100vh;
+}
+.ad-container{
+    position: relative;
+    width: 320px;
+    height: 480px;
+    background-color: #fff;
+    overflow: hidden;
+    a{
+       margin: 0;
+       padding: 0;
+       display: inline-block;
+    }
+}
+.adcontent{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.adcut1{
+    height: 100%;
+    background-image: url(src/cut1_bg.png);
+    background-size: cover;
+    background-position: center;
+    animation: fadeOut 0.5s ease 3s forwards;
+    z-index: 2;
+}
+.premierLogo{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    top: 13px;
+    transform: translate(-50%,150%) scale(3);
+    opacity: 0;
+    animation: slideIn 1s ease forwards;
+    img{
+        display: block;
+        width: 100px;
+        height: 100px;
+    }
+}
+.adcut2{
+    video{
+        width: 100%;
+    }
+}
+
+.carousel {
+    height: 320px;
+    bottom: 0;
+  }
+  
+.carousel-item {
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 100%; 
+  height: auto;
+  opacity: 0;
+  transition: all 0.5s ease;
+  
+  img{
+      width: 100%;
+      display: block;
+  }
+}
+
+.carousel-item.active {
+   left: 0;
+   opacity: 1;
+   animation: fadeOut 0.4s ease 3.5s forwards;
+}
+
+@keyframes slideIn{
+    0%{
+        transform: translate(-50%,150%) scale(3);
+        opacity: 0;
+    }
+    100%{
+        transform: translate(-50%,0%);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        display: none;
+    }
+}
+
+  

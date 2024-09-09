@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>richmedia-AdTest</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="ad-container">
+        <div class="adcontent adcut1">
+            <a class="premierLogo" href="https://www.performics.com/" target="_blank" rel="noopener noreferrer">
+                <img src="src/cut1_logo.png" alt="premier-Logo">
+            </a>
+        </div>
+        <div class="adcontent adcut2">
+            <a href="https://www.performics.com/" target="_blank" rel="noopener noreferrer">
+                <video preload="true" autoplay muted loop>
+                    <source src="src/Video.mp4" type="video/mp4">
+                </video>
+            </a>
+            <a class="carousel" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer">
+                <div class="carousel-item active">
+                    <img src="src/cut2_carousal1.png" alt="Image-1">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="src/cut2_carousal2.png" alt="Image-2">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="src/cut2_carousal3.png" alt="Image-3">
+                  </div>
+            </a>
+            
+        </div>
+    </div>
+    
+    <script>
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+        
+        // 自動輪播，3秒
+        setInterval(showNext, 3000);
+
+        function showNext() {
+          items[currentIndex].classList.remove('active');
+          currentIndex = (currentIndex + 1) % totalItems;
+          items[currentIndex].classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
