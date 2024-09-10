@@ -13,13 +13,13 @@
                 <img src="src/cut1_logo.png" alt="premier-Logo">
             </a>
         </div>
-        <div class="adcontent adcut2"  type="button" onclick="pauseVideo(event)">
-            <a href="https://www.performics.com/" target="_blank" rel="noopener noreferrer" >
+        <div class="adcontent adcut2"  type="button" >
+            <a href="https://www.performics.com/" target="_blank" rel="noopener noreferrer" onclick="pauseAni1(event)">
                 <video id="adVideo" preload="auto" autoplay muted controls controlslist="nodownload nofullscreen noplaybackrate noprogress"> 
                     <source src="src/Video.mp4" type="video/mp4">
                 </video>
             </a>
-            <a class="carousel" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer">
+            <a class="carousel" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
                 <div class="carousel-item active">
                     <img src="src/cut2_carousal1.png" alt="Image-1">
                   </div>
@@ -35,13 +35,6 @@
     </div>
     
     <script>
-        //點cut2暫停影片
-        function pauseVideo(event) {
-            event.preventDefault();
-            var video = document.getElementById('adVideo');
-            video.pause();
-            window.open('https://www.performics.com/', '_blank');
-        }
 
         //自動輪播
         let currentIndex = 0;
@@ -61,6 +54,23 @@
         setTimeout(() => {
           clearInterval(carouselInterval);
         }, 30000);
+
+
+        //點選連結 暫停影片&輪播
+        function pauseAni1(event) {
+            event.preventDefault();
+            var video = document.getElementById('adVideo');
+            video.pause();
+            clearInterval(carouselInterval);
+            window.open('https://www.performics.com/', '_blank');
+        }
+        function pauseAni2(event) {
+            event.preventDefault();
+            var video = document.getElementById('adVideo');
+            video.pause();
+            clearInterval(carouselInterval);
+            window.open('https://www.performics.com/our-work/', '_blank');
+        }
 
     </script>
 </body>
