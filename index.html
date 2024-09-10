@@ -13,9 +13,9 @@
                 <img src="src/cut1_logo.png" alt="premier-Logo">
             </a>
         </div>
-        <div class="adcontent adcut2">
-            <a href="https://www.performics.com/" target="_blank" rel="noopener noreferrer">
-                <video preload="true" autoplay muted loop>
+        <div class="adcontent adcut2"  type="button" onclick="pauseVideo(event)">
+            <a href="https://www.performics.com/" target="_blank" rel="noopener noreferrer" >
+                <video id="adVideo" preload="auto" autoplay muted controls controlslist="nodownload nofullscreen noplaybackrate noprogress"> 
                     <source src="src/Video.mp4" type="video/mp4">
                 </video>
             </a>
@@ -35,18 +35,33 @@
     </div>
     
     <script>
+        //點cut2暫停影片
+        function pauseVideo(event) {
+            event.preventDefault();
+            var video = document.getElementById('adVideo');
+            video.pause();
+            window.open('https://www.performics.com/', '_blank');
+        }
+
+        //自動輪播
         let currentIndex = 0;
         const items = document.querySelectorAll('.carousel-item');
         const totalItems = items.length;
-        
-        // 自動輪播，3秒
-        setInterval(showNext, 3000);
 
         function showNext() {
           items[currentIndex].classList.remove('active');
+          items[currentIndex].classList.add('exit');
           currentIndex = (currentIndex + 1) % totalItems;
+          items[currentIndex].classList.remove('exit');
           items[currentIndex].classList.add('active');
         }
+
+        const carouselInterval = setInterval(showNext, 2500);
+        //30秒停止輪播
+        setTimeout(() => {
+          clearInterval(carouselInterval);
+        }, 30000);
+
     </script>
 </body>
 
