@@ -10,8 +10,8 @@ body {
   position: relative;
   width: 320px;
   height: 480px;
-  background-color: #fff;
   overflow: hidden;
+  background-color: #fff;
 }
 .ad-container a {
   margin: 0;
@@ -26,12 +26,11 @@ body {
 }
 
 .adcut1 {
-  height: 100%;
   background-image: url(src/cut1_bg.png);
   background-size: cover;
   background-position: center;
   animation: fadeOut 0.5s ease 3s forwards;
-  z-index: 2;
+  z-index: 5;
 }
 
 .premierLogo {
@@ -49,36 +48,47 @@ body {
   height: 100px;
 }
 
+.adcut2 .videoLink {
+  height: 180px;
+}
 .adcut2 video {
   width: 100%;
 }
 
-.carousel {
-  height: 320px;
-  bottom: 0;
+.swiper-carousel {
+  position: relative;
+  overflow: hidden;
 }
 
-.carousel-item {
+.swiper-wrapper {
+  width: 100%;
+}
+.swiper-wrapper .swiper-slide a {
+  width: 320px;
+}
+.swiper-wrapper .swiper-slide img {
+  width: 100%;
+}
+
+.swiper-button-next, .swiper-button-prev {
   position: absolute;
-  bottom: 0;
-  left: 30%;
-  width: 100%;
-  height: auto;
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-.carousel-item img {
-  width: 100%;
-  display: block;
-}
-
-.carousel-item.active {
+  top: 50%;
+  width: 40px;
+  height: 60px;
+  color: #fff;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 20%, rgba(0, 0, 0, 0.1) 100%);
   left: 0;
-  opacity: 1;
+  z-index: 2;
+}
+.swiper-button-next::after, .swiper-button-prev::after {
+  font-size: 26px;
 }
 
-.carousel-item.exit {
-  opacity: 0;
+.swiper-button-next {
+  left: auto;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.5) 20%, rgba(0, 0, 0, 0.2) 100%);
+  text-align: right;
+  right: 0;
 }
 
 @keyframes slideIn {
