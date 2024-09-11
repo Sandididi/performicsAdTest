@@ -57,13 +57,16 @@ body {
 
 .swiper-carousel {
   position: relative;
-  overflow: hidden;
 }
 
 .swiper-wrapper {
   width: 100%;
 }
+.swiper-wrapper .swiper-slide {
+  transform: translateY(-5px);
+}
 .swiper-wrapper .swiper-slide a {
+  display: block;
   width: 320px;
 }
 .swiper-wrapper .swiper-slide img {

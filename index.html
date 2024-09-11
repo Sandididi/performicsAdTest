@@ -29,19 +29,19 @@
                 <div class="swiper-wrapper">
                   <!-- Slide 1 -->
                   <div class="swiper-slide">
-                    <a href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
+                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
                       <img src="src/cut2_carousal1.png" alt="Image-1">
                     </a>
                   </div>
                   <!-- Slide 2 -->
                   <div class="swiper-slide">
-                    <a href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
+                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
                       <img src="src/cut2_carousal2.png" alt="Image-2">
                     </a>
                   </div>
                   <!-- Slide 3 -->
                   <div class="swiper-slide">
-                    <a href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
+                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
                       <img src="src/cut2_carousal3.png" alt="Image-3">
                     </a>
                   </div>
@@ -71,13 +71,25 @@
           },
           simulateTouch: true, 
           slidesPerView: 1,
-          spaceBetween: 30,
+          spaceBetween: 0,
         });
 
         //自動輪播30s
         setTimeout(() => {
           swiper.autoplay.stop();
         }, 30000);
+
+        // 廣告
+        Enabler.addEventListener(Enabler.Event.INIT, function() {
+
+          Enabler.addEventListener(Enabler.Event.CLICK, function(event) {
+            if (event.target.classList.contains('videoLink')) {
+              pauseAni1(event);
+            } else if (event.target.classList.contains('swipeLink')) {
+              pauseAni2(event);
+            }
+          });
+        });
 
         //點選連結 暫停影片&輪播
         function pauseAni1(event) {
@@ -86,6 +98,7 @@
             video.pause();
             swiper.autoplay.stop();
             window.open('https://www.performics.com/', '_blank');
+            console.log('videoClick');
         }
         function pauseAni2(event) {
             event.preventDefault();
@@ -93,20 +106,10 @@
             video.pause();
             swiper.autoplay.stop();
             window.open('https://www.performics.com/our-work/', '_blank');
+            console.log('swiperClick');
         }
 
-        // 廣告初始化
-        window.onload = function() {
-          if (Enabler.isInitialized()) {
-            enablerInitHandler();
-          } else {
-            Enabler.addEventListener(studio.events.StudioEvent.INIT, enablerInitHandler);
-          }
-        }
-
-        function enablerInitHandler() {
-
-        }
+        
 
     </script>
 </body>
