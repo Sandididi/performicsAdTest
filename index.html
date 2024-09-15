@@ -20,7 +20,7 @@
             </a>
         </div>
         <div class="adcontent adcut2"  type="button" >
-            <a class="videoLink" href="https://www.performics.com/" target="_blank" rel="noopener noreferrer" onclick="pauseAni1(event)">
+            <a class="videoLink" href="https://www.performics.com/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
                 <video id="adVideo" preload="auto" autoplay muted controls controlslist="nodownload nofullscreen noplaybackrate noprogress"> 
                     <source src="src/Video.mp4" type="video/mp4">
                 </video>
@@ -29,19 +29,19 @@
                 <div class="swiper-wrapper">
                   <!-- Slide 1 -->
                   <div class="swiper-slide">
-                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
+                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
                       <img src="src/cut2_carousal1.png" alt="Image-1">
                     </a>
                   </div>
                   <!-- Slide 2 -->
                   <div class="swiper-slide">
-                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
+                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
                       <img src="src/cut2_carousal2.png" alt="Image-2">
                     </a>
                   </div>
                   <!-- Slide 3 -->
                   <div class="swiper-slide">
-                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni2(event)">
+                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
                       <img src="src/cut2_carousal3.png" alt="Image-3">
                     </a>
                   </div>
@@ -80,33 +80,42 @@
         }, 30000);
 
         // 廣告
-        Enabler.addEventListener(Enabler.Event.INIT, function() {
-
-          Enabler.addEventListener(Enabler.Event.CLICK, function(event) {
-            if (event.target.classList.contains('videoLink')) {
-              pauseAni1(event);
-            } else if (event.target.classList.contains('swipeLink')) {
-              pauseAni2(event);
-            }
-          });
-        });
-
-        //點選連結 暫停影片&輪播
-        function pauseAni1(event) {
-            event.preventDefault();
-            var video = document.getElementById('adVideo');
-            video.pause();
-            swiper.autoplay.stop();
-            window.open('https://www.performics.com/', '_blank');
-            console.log('videoClick');
+        if (!Enabler.isInitialized()) {
+          Enabler.addEventListener(studio.events.StudioEvent.INIT, init);
+        } else {
+          init();
         }
-        function pauseAni2(event) {
+
+        function init() {        
+          addListeners();
+        }
+
+        function addListeners(){
+          document.getElementById('adVideo').addEventListener('click', exitClickVideo);
+          var swipeBtn = document.getElementsByClassName('swipeLink');
+          for (var i = 0; i < swipeBtn.length; i++) {
+            swipeBtn[i].addEventListener('click', exitClickbanner);
+          }
+        }
+
+        function exitClickVideo() {
+          Enabler.exitOverride("Click video", "https://www.performics.com/");
+        }
+        function exitClickbanner() {
+          Enabler.exitOverride("Click banner", "https://www.performics.com/our-work/");
+        }
+
+        // var adVideo = document.getElementById('adVideo');
+        // Enabler.loadModule(studio.module.ModuleId.VIDEO, function() {
+        //   studio.video.Reporter.attach('adVideo', adVideo);
+        // });
+
+        //點擊暫停影片&輪播
+        function pauseAni(event) {
             event.preventDefault();
             var video = document.getElementById('adVideo');
             video.pause();
             swiper.autoplay.stop();
-            window.open('https://www.performics.com/our-work/', '_blank');
-            console.log('swiperClick');
         }
 
         
