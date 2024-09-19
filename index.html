@@ -29,19 +29,19 @@
                 <div class="swiper-wrapper">
                   <!-- Slide 1 -->
                   <div class="swiper-slide">
-                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
+                    <a class="swipeLink" id="carousel-1" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
                       <img src="src/cut2_carousal1.png" alt="Image-1">
                     </a>
                   </div>
                   <!-- Slide 2 -->
                   <div class="swiper-slide">
-                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
+                    <a class="swipeLink" id="carousel-2" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
                       <img src="src/cut2_carousal2.png" alt="Image-2">
                     </a>
                   </div>
                   <!-- Slide 3 -->
                   <div class="swiper-slide">
-                    <a class="swipeLink" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
+                    <a class="swipeLink" id="carousel-3" href="https://www.performics.com/our-work/" target="_blank" rel="noopener noreferrer" onclick="pauseAni(event)">
                       <img src="src/cut2_carousal3.png" alt="Image-3">
                     </a>
                   </div>
@@ -88,27 +88,55 @@
 
         function init() {        
           addListeners();
+          var video = document.getElementById('adVideo');
+          var watched25 = false;
+          var watched50 = false;
+          // var watched75 = false;
+          // var watched100 = false;
+          function adVideoTracking(){
+            video.addEventListener('timeupdate', function() {
+            var currentTime = video.currentTime;
+            var duration = video.duration;
+
+            // 50%
+              if (!watched25 && currentTime >= duration * 0.5) {
+                  watched25 = true;
+                  Enabler.counter('VideoWatched25Percent');
+                  console.log('影片播放到 25%');
+              }
+            
+            // 50%
+              if (!watched50 && currentTime >= duration * 1.0) {
+                  watched50 = true;
+                  Enabler.counter('VideoReached50Percent'); 
+                  console.log('影片播放到 50%');
+              }
+            });
+          }
         }
 
         function addListeners(){
           document.getElementById('adVideo').addEventListener('click', exitClickVideo);
-          var swipeBtn = document.getElementsByClassName('swipeLink');
-          for (var i = 0; i < swipeBtn.length; i++) {
-            swipeBtn[i].addEventListener('click', exitClickbanner);
-          }
+          document.getElementById('carousel-1').addEventListener('click', exitClickbanner1);
+          document.getElementById('carousel-2').addEventListener('click', exitClickbanner2);
+          document.getElementById('carousel-3').addEventListener('click', exitClickbanner3);
         }
 
         function exitClickVideo() {
           Enabler.exitOverride("Click video", "https://www.performics.com/");
         }
-        function exitClickbanner() {
-          Enabler.exitOverride("Click banner", "https://www.performics.com/our-work/");
+        function exitClickbanner1() {
+          Enabler.exitOverride("Click banner-1", "https://www.performics.com/our-work/");
+        }
+        function exitClickbanner2() {
+          Enabler.exitOverride("Click banner-2", "https://www.performics.com/our-work/");
+        }
+        function exitClickbanner3() {
+          Enabler.exitOverride("Click banner-3", "https://www.performics.com/our-work/");
         }
 
-        // var adVideo = document.getElementById('adVideo');
-        // Enabler.loadModule(studio.module.ModuleId.VIDEO, function() {
-        //   studio.video.Reporter.attach('adVideo', adVideo);
-        // });
+        
+
 
         //點擊暫停影片&輪播
         function pauseAni(event) {
